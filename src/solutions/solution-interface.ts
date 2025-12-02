@@ -5,3 +5,7 @@ export interface SolutionInterface {
     getPart2(): string;
 
 }
+
+export interface SolutionInterfaceConstructor {
+    new(inputPath: string): SolutionInterface;
+}

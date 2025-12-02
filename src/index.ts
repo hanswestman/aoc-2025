@@ -1,4 +1,4 @@
-import type { SolutionInterface } from "./solutions/solution-interface.ts";
+import type { SolutionInterface, SolutionInterfaceConstructor } from "./solutions/solution-interface.ts";
 
 const days = new Map<string, string>([
   ["01", "./solutions/day-01.ts"],
@@ -7,8 +7,8 @@ const days = new Map<string, string>([
 
 async function getSolutions(day: string, path: string) {
   const module = await import(path);
-  const solutionClass: { new (): SolutionInterface } = module.default;
-  const solution: SolutionInterface = new solutionClass();
+  const solutionClass: SolutionInterfaceConstructor = module.default;
+  const solution: SolutionInterface = new solutionClass(`inputs/${day}.txt`);
 
   console.log(`Part 1: ${solution.getPart1()}`);
   console.log(`Part 2: ${solution.getPart2()}`);

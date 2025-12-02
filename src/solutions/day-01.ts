@@ -2,14 +2,15 @@ import fs from "fs";
 import { BaseSolution } from "./base-solution.ts";
 
 export default class Day01 extends BaseSolution {
-  getPart1(): string {
-    const input = fs.readFileSync("inputs/01.txt", "utf8");
-    const startValue = 50;
-    const maxAlternatives = 100;
+  #startValue = 50;
+  #maxAlternatives = 100;
 
-    let zeroes = 0;
+  moves: number[];
 
-    const moves = input
+  constructor(inputPath: string) {
+    super(inputPath);
+
+    this.moves = this.input
       .split("\n")
       .map((row) => row.trim())
       .map((move) =>
@@ -17,15 +18,18 @@ export default class Day01 extends BaseSolution {
           ? -1 * Number(move.substring(1))
           : Number(move.substring(1))
       );
+  }
 
-    let value = startValue;
+  getPart1(): string {
+    let zeroes = 0;
+    let value = this.#startValue;
 
-    for (const move of moves) {
+    for (const move of this.moves) {
       value += move;
-      value %= maxAlternatives;
+      value %= this.#maxAlternatives;
 
       if (value < 0) {
-        value = maxAlternatives + value;
+        value = this.#maxAlternatives + value;
       }
 
       if (value === 0) {
@@ -37,41 +41,27 @@ export default class Day01 extends BaseSolution {
   }
 
   getPart2(): string {
-    const input = fs.readFileSync("inputs/01.txt", "utf8");
-    const startValue = 50;
-    const maxAlternatives = 100;
-
     let zeroes = 0;
+    let value = this.#startValue;
 
-    const moves = input
-      .split("\n")
-      .map((row) => row.trim())
-      .map((move) =>
-        move.at(0) === "L"
-          ? -1 * Number(move.substring(1))
-          : Number(move.substring(1))
-      );
-
-    let value = startValue;
-
-    for (const move of moves) {
-      const fullRotations = Math.floor(Math.abs(move) / maxAlternatives);
+    for (const move of this.moves) {
+      const fullRotations = Math.floor(Math.abs(move) / this.#maxAlternatives);
       zeroes += fullRotations;
 
-      const partialMove = move % maxAlternatives;
+      const partialMove = move % this.#maxAlternatives;
       let nextValue = value + partialMove;
 
       if (partialMove < 0 && nextValue < 0) {
         if (value > 0) {
           zeroes++;
         }
-        nextValue += maxAlternatives;
+        nextValue += this.#maxAlternatives;
       } else {
-        if (nextValue >= maxAlternatives) {
-          if (nextValue !== maxAlternatives) {
+        if (nextValue >= this.#maxAlternatives) {
+          if (nextValue !== this.#maxAlternatives) {
             zeroes++;
           }
-          nextValue %= maxAlternatives;
+          nextValue %= this.#maxAlternatives;
         }
       }
 
