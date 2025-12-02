@@ -1,0 +1,15 @@
+{
+  "name": "aoc-2025",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Hans Westman",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
