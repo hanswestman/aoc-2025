@@ -1,6 +1,9 @@
 import type { SolutionInterface } from "./solutions/solution-interface.ts";
 
-const days = new Map<string, string>([["01", "./solutions/day-01.ts"]]);
+const days = new Map<string, string>([
+  ["01", "./solutions/day-01.ts"],
+  ["02", "./solutions/day-02.ts"]
+]);
 
 async function getSolutions(day: string, path: string) {
   const module = await import(path);
@@ -13,14 +16,12 @@ async function getSolutions(day: string, path: string) {
 
 if (process.argv.length > 2) {
   const day = process.argv[2];
-  if (!/^([0][1-9]|[1][0-9]|[2][0-5])$/.test(day)) {
+  if (!days.has(day)) {
     console.log("No valid day selected.");
     process.exit(1);
   }
 
   console.log(`Day ${day}`);
 
-  if (days.has(day)) {
-    await getSolutions(day, days.get(day));
-  }
+  await getSolutions(day, days.get(day));
 }
