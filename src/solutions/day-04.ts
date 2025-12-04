@@ -1,6 +1,6 @@
 import { BaseSolution } from "./base-solution.ts";
 
-export default class Day03 extends BaseSolution {
+export default class Day04 extends BaseSolution {
   grid: string[][] = [];
 
   constructor(inputPath: string) {
