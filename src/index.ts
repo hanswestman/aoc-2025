@@ -2,7 +2,8 @@ import type { SolutionInterface, SolutionInterfaceConstructor } from "./solution
 
 const days = new Map<string, string>([
   ["01", "./solutions/day-01.ts"],
-  ["02", "./solutions/day-02.ts"]
+  ["02", "./solutions/day-02.ts"],
+  ["03", "./solutions/day-03.ts"],
 ]);
 
 async function getSolutions(day: string, path: string) {

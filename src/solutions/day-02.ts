@@ -2,7 +2,7 @@ import { BaseSolution } from "./base-solution.ts";
 
 type Range = { from: number; to: number };
 
-export default class Day01 extends BaseSolution {
+export default class Day02 extends BaseSolution {
   ranges: Range[];
 
   constructor(inputPath: string) {
