@@ -12,7 +12,6 @@ export default class Day01 extends BaseSolution {
 
     this.moves = this.input
       .split("\n")
-      .map((row) => row.trim())
       .map((move) =>
         move.at(0) === "L"
           ? -1 * Number(move.substring(1))
@@ -20,7 +19,7 @@ export default class Day01 extends BaseSolution {
       );
   }
 
-  getPart1(): string {
+  getPart1(): number {
     let zeroes = 0;
     let value = this.#startValue;
 
@@ -37,10 +36,10 @@ export default class Day01 extends BaseSolution {
       }
     }
 
-    return zeroes.toString();
+    return zeroes;
   }
 
-  getPart2(): string {
+  getPart2(): number {
     let zeroes = 0;
     let value = this.#startValue;
 
@@ -72,6 +71,6 @@ export default class Day01 extends BaseSolution {
       }
     }
 
-    return zeroes.toString();
+    return zeroes;
   }
 }

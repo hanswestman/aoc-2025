@@ -9,7 +9,7 @@ export default class Day02 extends BaseSolution {
     super(inputPath);
 
     this.ranges = this.input.split(",").map((range) => {
-      const [from, to] = range.trim().split("-");
+      const [from, to] = range.split("-");
 
       return {
         from: Number(from),
@@ -18,30 +18,30 @@ export default class Day02 extends BaseSolution {
     });
   }
 
-  getPart1(): string {
+  getPart1(): number {
     const sumOfInvalidIds: number = this.ranges.reduce((sum, range) => {
-      return sum + this.#getSumOfInvalidIdsInRangePart1(range);
+      return sum + this.getSumOfInvalidIdsInRangePart1(range);
     }, 0);
 
-    return sumOfInvalidIds.toString();
+    return sumOfInvalidIds;
   }
 
-  getPart2(): string {
+  getPart2(): number {
     const sumOfInvalidIds: number = this.ranges.reduce((sum, range) => {
       return sum + this.#getSumOfInvalidIdsInRangePart2(range);
     }, 0);
 
-    return sumOfInvalidIds.toString();
+    return sumOfInvalidIds;
   }
 
-  #getSumOfInvalidIdsInRangePart1(range: Range): number {
-    return this.#findInvalidIdsInRangePart1(range).reduce(
+  getSumOfInvalidIdsInRangePart1(range: Range): number {
+    return this.findInvalidIdsInRangePart1(range).reduce(
       (sum, invalidId) => sum + invalidId,
       0
     );
   }
 
-  #findInvalidIdsInRangePart1(range: Range): number[] {
+  findInvalidIdsInRangePart1(range: Range): number[] {
     const invalidIds: number[] = [];
 
     for (let i = range.from; i <= range.to; i++) {

@@ -6,35 +6,35 @@ export default class Day04 extends BaseSolution {
   constructor(inputPath: string) {
     super(inputPath);
 
-    const rows = this.input.split("\n").map((row) => row.trim());
+    const rows = this.input.split("\n");
 
     for (let i = 0; i < rows.length; i++) {
       this.grid.push(rows[i].split(""));
     }
   }
 
-  getPart1(): string {
+  getPart1(): number {
     let sum = 0;
 
     for (let y = 0; y < this.grid.length; y++) {
       for (let x = 0; x < this.grid[0].length; x++) {
-        if (this.grid[y][x] === "@" && this.#getAdjacentRolls(x, y) < 4) {
+        if (this.grid[y][x] === "@" && this.getAdjacentRolls(x, y) < 4) {
           sum++;
         }
       }
     }
 
-    return sum.toString();
+    return sum;
   }
 
-  getPart2(): string {
+  getPart2(): number {
     let sum = 0;
     let partialSum = 0;
     do {
       partialSum = 0;
       for (let y = 0; y < this.grid.length; y++) {
         for (let x = 0; x < this.grid[0].length; x++) {
-          if (this.grid[y][x] === "@" && this.#getAdjacentRolls(x, y) < 4) {
+          if (this.grid[y][x] === "@" && this.getAdjacentRolls(x, y) < 4) {
             this.grid[y][x] = "x";
             partialSum++;
           }
@@ -44,10 +44,10 @@ export default class Day04 extends BaseSolution {
       sum += partialSum;
     } while (partialSum > 0);
 
-    return sum.toString();
+    return sum;
   }
 
-  #getAdjacentRolls(posX, posY): number {
+  getAdjacentRolls(posX, posY): number {
     let adjacentRolls = 0;
     for (let y = posY - 1; y <= posY + 1; y++) {
       for (let x = posX - 1; x <= posX + 1; x++) {

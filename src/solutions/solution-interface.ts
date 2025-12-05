@@ -1,8 +1,8 @@
 export interface SolutionInterface {
 
-    getPart1(): string;
+    getPart1(): number;
 
-    getPart2(): string;
+    getPart2(): number;
 
 }
 

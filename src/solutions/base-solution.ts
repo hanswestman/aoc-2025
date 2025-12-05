@@ -5,9 +5,9 @@ export abstract class BaseSolution implements SolutionInterface {
   input: string;
 
   constructor(inputPath: string) {
-    this.input = fs.readFileSync(inputPath, "utf8");
+    this.input = fs.readFileSync(inputPath, "utf8").replaceAll("\r", "");
   }
 
-  abstract getPart1(): string;
-  abstract getPart2(): string;
+  abstract getPart1(): number;
+  abstract getPart2(): number;
 }

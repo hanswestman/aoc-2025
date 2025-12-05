@@ -6,30 +6,30 @@ export default class Day03 extends BaseSolution {
   constructor(inputPath: string) {
     super(inputPath);
 
-    this.rows = this.input.split("\n").map((row) => row.trim());
+    this.rows = this.input.split("\n");
   }
 
-  getPart1(): string {
+  getPart1(): number {
     let sum = 0;
 
     for (const row of this.rows) {
-      sum += Number(this.#getJoltages(row, 2, 0));
+      sum += Number(this.getJoltages(row, 2, 0));
     }
 
-    return sum.toString();
+    return sum;
   }
 
-  getPart2(): string {
+  getPart2(): number {
     let sum = 0;
 
     for (const row of this.rows) {
-      sum += Number(this.#getJoltages(row, 12, 0));
+      sum += Number(this.getJoltages(row, 12, 0));
     }
 
-    return sum.toString();
+    return sum;
   }
 
-  #getJoltages(
+  getJoltages(
     row: string,
     batteries: number,
     fromIndex: number,
@@ -45,7 +45,7 @@ export default class Day03 extends BaseSolution {
       .toSorted()
       .reverse()[0];
 
-    return this.#getJoltages(
+    return this.getJoltages(
       row,
       batteries - 1,
       row.indexOf(topValue, fromIndex) + 1,
