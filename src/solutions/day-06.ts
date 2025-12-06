@@ -3,7 +3,7 @@ import { add, multiply } from "../utilities/number-array.ts";
 
 export default class Day06 extends BaseSolution {
   numbers: string[][];
-  methods: string[];
+  operators: string[];
 
   constructor(inputPath: string) {
     super(inputPath);
@@ -11,9 +11,9 @@ export default class Day06 extends BaseSolution {
     const rows = this.input.split("\n");
     const columnStartIndices: number[] = [];
 
-    const methodsRow = rows.at(-1);
-    for (let i = 0; i < methodsRow.length; i++) {
-      if (methodsRow.at(i) !== " ") {
+    const operatorsRow = rows.at(-1);
+    for (let i = 0; i < operatorsRow.length; i++) {
+      if (operatorsRow.at(i) !== " ") {
         columnStartIndices.push(i);
       }
     }
@@ -35,13 +35,13 @@ export default class Day06 extends BaseSolution {
       return rowNumbers;
     });
 
-    this.methods = methodsRow
+    this.operators = operatorsRow
       .split("")
       .filter((character) => character !== " ");
   }
 
   getPart1(): number {
-    return this.methods.reduce((sum, method, index) => {
+    return this.operators.reduce((sum, method, index) => {
       const numbers = this.getRegularColumnValues(index).map(Number);
 
       return sum + (method === "+" ? add(numbers) : multiply(numbers));
@@ -49,7 +49,7 @@ export default class Day06 extends BaseSolution {
   }
 
   getPart2(): number {
-    return this.methods.reduce((sum, method, index) => {
+    return this.operators.reduce((sum, method, index) => {
       const regularValues = this.getRegularColumnValues(index);
       const numbers = this.convertNumbersToCephalopod(regularValues);
 
