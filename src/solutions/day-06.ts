@@ -1,5 +1,5 @@
 import { BaseSolution } from "./base-solution.ts";
-import { add, multiply } from "../utilities/number-array.ts";
+import { add, multiply } from "../common/utilities/number-array.ts";
 
 export default class Day06 extends BaseSolution {
   numbers: string[][];
