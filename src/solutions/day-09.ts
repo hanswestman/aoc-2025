@@ -2,10 +2,12 @@ import { BaseSolution } from "./base-solution.ts";
 
 type Position = { x: number; y: number };
 type Box = { positionA: Position; positionB: Position; area: number };
+type Edge = { x1: number; y1: number; x2: number; y2: number };
 
 export default class Day09 extends BaseSolution {
   corners: Position[];
   boxes: Box[] = [];
+  edges: Edge[] = [];
 
   constructor(inputPath: string) {
     super(inputPath);
@@ -17,6 +19,13 @@ export default class Day09 extends BaseSolution {
     });
 
     for (let i = 0; i < this.corners.length - 1; i++) {
+      this.edges.push({
+        x1: this.corners[i].x,
+        y1: this.corners[i].y,
+        x2: this.corners[i + 1].x,
+        y2: this.corners[i + 1].y,
+      });
+
       for (let j = i + 1; j < this.corners.length; j++) {
         if (i === j) {
           continue;
@@ -38,6 +47,9 @@ export default class Day09 extends BaseSolution {
   }
 
   getPart2(): number {
+    for (const box in this.boxes) {
+    }
+
     return 0;
   }
 
