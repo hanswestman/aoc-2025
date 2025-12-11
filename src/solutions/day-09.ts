@@ -1,11 +1,17 @@
 import { BaseSolution } from "./base-solution.ts";
 
-type Position = { x: number; y: number };
-type Box = { positionA: Position; positionB: Position; area: number };
+type Corner = { x: number; y: number };
+type Box = {
+  top: number;
+  left: number;
+  bottom: number;
+  right: number;
+  area: number;
+};
 type Edge = { x1: number; y1: number; x2: number; y2: number };
 
 export default class Day09 extends BaseSolution {
-  corners: Position[];
+  corners: Corner[];
   boxes: Box[] = [];
   edges: Edge[] = [];
 
@@ -31,11 +37,7 @@ export default class Day09 extends BaseSolution {
           continue;
         }
 
-        this.boxes.push({
-          positionA: this.corners[i],
-          positionB: this.corners[j],
-          area: this.getArea(this.corners[i], this.corners[j]),
-        });
+        this.boxes.push(this.getBox(this.corners[i], this.corners[j]));
       }
     }
 
@@ -47,13 +49,50 @@ export default class Day09 extends BaseSolution {
   }
 
   getPart2(): number {
-    for (const box in this.boxes) {
+    const boundingBoxes: Box[] = this.corners.reduce((acc, _, i) => {
+      acc.push(
+        this.getBox(
+          this.corners[i === 0 ? this.corners.length - 1 : i - 1], 
+          this.corners[i]
+        )
+      );
+
+      return acc;
+    }, [] as Box[]);
+
+    for (const box of this.boxes) {
+      let inside = true;
+      for (let i = 0; i < boundingBoxes.length && inside; i++) {
+        inside = inside && !this.aabbCollision(box, boundingBoxes[i]);
+      }
+      if (inside) {
+        return box.area;
+      }
     }
 
     return 0;
   }
 
-  getArea(a: Position, b: Position): number {
+  getBox(a: Corner, b: Corner): Box {
+    return {
+      top: Math.min(a.y, b.y),
+      left: Math.min(a.x, b.x),
+      bottom: Math.max(a.y, b.y),
+      right: Math.max(a.x, b.x),
+      area: this.getArea(a, b),
+    };
+  }
+
+  getArea(a: Corner, b: Corner): number {
     return (Math.abs(b.x - a.x) + 1) * (Math.abs(b.y - a.y) + 1);
+  }
+
+  aabbCollision(a: Box, b: Box): boolean {
+    const leftGap = a.left >= b.right;
+    const rightGap = a.right <= b.left;
+    const topGap = a.top >= b.bottom;
+    const bottomGap = a.bottom <= b.top;
+
+    return !(leftGap || rightGap || topGap || bottomGap);
   }
 }
