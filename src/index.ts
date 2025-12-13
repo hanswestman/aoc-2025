@@ -13,6 +13,7 @@ const days = new Map<string, string>([
   ["07", "./solutions/day-07.ts"],
   ["08", "./solutions/day-08.ts"],
   ["09", "./solutions/day-09.ts"],
+  ["10", "./solutions/day-10.ts"],
 ]);
 
 async function solveDay(day: string, path: string) {
