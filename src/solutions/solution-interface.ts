@@ -1,8 +1,8 @@
 export interface SolutionInterface {
 
-    getPart1(): number;
+    getPart1(): number|Promise<number>;
 
-    getPart2(): number;
+    getPart2(): number|Promise<number>;
 
 }
 

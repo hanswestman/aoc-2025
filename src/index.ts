@@ -21,8 +21,11 @@ async function solveDay(day: string, path: string) {
   const solutionClass: SolutionInterfaceConstructor = module.default;
   const solution: SolutionInterface = new solutionClass(`inputs/${day}.txt`);
 
-  console.log(`Day ${day} Part 1: ${solution.getPart1()}`);
-  console.log(`Day ${day} Part 2: ${solution.getPart2()}`);
+  const resultPart1 = await solution.getPart1();
+  const resultPart2 = await solution.getPart2();
+
+  console.log(`Day ${day} Part 1: ${resultPart1}`);
+  console.log(`Day ${day} Part 2: ${resultPart2}`);
 }
 
 if (process.argv.length > 2) {

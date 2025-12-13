@@ -8,6 +8,6 @@ export abstract class BaseSolution implements SolutionInterface {
     this.input = fs.readFileSync(inputPath, "utf8").replaceAll("\r", "");
   }
 
-  abstract getPart1(): number;
-  abstract getPart2(): number;
+  abstract getPart1(): number|Promise<number>;
+  abstract getPart2(): number|Promise<number>;
 }

@@ -11,5 +11,8 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.1"
+  },
+  "dependencies": {
+    "z3-solver": "^4.15.4"
   }
 }
