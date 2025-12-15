@@ -49,23 +49,23 @@ export default class Day09 extends BaseSolution {
   }
 
   getPart2(): number {
-    const boundingBoxes: Box[] = this.corners.reduce((acc, _, i) => {
-      acc.push(
+    const boundingBoxes: Box[] = this.corners.reduce((boxes, _, i) => {
+      boxes.push(
         this.getBox(
-          this.corners[i === 0 ? this.corners.length - 1 : i - 1], 
+          this.corners[i === 0 ? this.corners.length - 1 : i - 1],
           this.corners[i]
         )
       );
 
-      return acc;
+      return boxes;
     }, [] as Box[]);
 
     for (const box of this.boxes) {
-      let inside = true;
-      for (let i = 0; i < boundingBoxes.length && inside; i++) {
-        inside = inside && !this.aabbCollision(box, boundingBoxes[i]);
-      }
-      if (inside) {
+      if (
+        !boundingBoxes.some((boundingBox) =>
+          this.aabbCollision(box, boundingBox)
+        )
+      ) {
         return box.area;
       }
     }
